@@ -1,0 +1,6 @@
+title: dc303
+description: Denver DEFCON group
+url: "https://dc303-meetup.github.io"
+rss_path: "feed.xml"
+markdown: kramdown
+repository: dc303-meetup/dc303-meetup.github.io

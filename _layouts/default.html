@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>{{ page.title | default: site.title }}</title>
+  <link rel="stylesheet" type="text/css" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.rss_path | absolute_url }}">
+</head>
+
+<body>
+  <div id="container">
+    <table id="nav-table">
+      <tbody>
+        <tr>
+          <td> <a href="{{ '/' | relative_url }}">home</a> </td>
+          <td> <a href="{{ '/meetings.html' | relative_url }}">meetings</a> </td>
+          <td> <a href="{{ '/feed.xml' | relative_url }}">rss</a> </td>
+          <td> <a href="{{ '/list.html' | relative_url }}">mailing list</a> </td>
+          <td> <a href="{{ '/contacts.html' | relative_url }}">contacts</a> </td>
+        </tr>
+      </tbody>
+    </table>
+
+    {{ content }}
+
+  </div>
+</body>
+
+</html>
