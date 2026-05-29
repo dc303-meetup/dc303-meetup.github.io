@@ -9,7 +9,7 @@ title: dc303 - mailing list
       <td>about</td>
       <td>the mailing list is a low volume list that is mostly focused on
       topics interesting to the group (computer security, technology,
-      etc). currently, there is over 125 people on the list.</td>
+      etc). currently, there is over 125 people on the list. (note: the mailing list is being deprecated, so join our discord channel or follow our rss feed to stay up to date with meetup announcements!)</td>
     </tr>
 
     <tr>
