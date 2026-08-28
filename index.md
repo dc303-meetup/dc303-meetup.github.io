@@ -37,5 +37,30 @@ title: dc303
       </td>
     </tr>
 
+    <tr>
+      <td>faq</td>
+      <td>
+        <p>
+          <b>do i need to be a denhac member to attend?</b><br>
+          no, you do not need to be a member. if the door is locked, please reach out using the details on the <a href="{{ '/contacts.html' | relative_url }}">contacts page</a> or call the phone number posted on the common area glass door.
+        </p>
+
+        <p>
+          <b>is on-site parking available?</b><br>
+          yes. on meetup days, parking is free in the lot next to denhac, as well as the lot directly across Kalamath street (both are owned by our building).
+        </p>
+
+        <p>
+          <b>has denhac been closed by the Santa Fe road construction?</b><br>
+          no, denhac remains open. you can access the building by turning in from Kalamath street, or by using the alley located to the south of denhac and west of Santa Fe.
+        </p>
+
+        <p>
+          <b>do you accept talk proposals?</b><br>
+          yes, we are always accepting talk proposals. feel free to reach out via the <a href="{{ '/contacts.html' | relative_url }}">contacts page</a>.
+        </p>
+      </td>
+    </tr>
+
   </tbody>
 </table>
