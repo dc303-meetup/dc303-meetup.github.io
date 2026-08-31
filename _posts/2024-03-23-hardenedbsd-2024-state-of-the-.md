@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "HardenedBSD 2024 State of the Union: A Decade of Hardened Bits"
 date: 2024-03-23
 presenter: "Shawn Webb"

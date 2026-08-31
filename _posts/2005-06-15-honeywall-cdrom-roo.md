@@ -1,5 +1,4 @@
 ﻿---
-layout: default
 title: "honeywall cdrom 'roo'"
 date: 2005-06-15
 ---

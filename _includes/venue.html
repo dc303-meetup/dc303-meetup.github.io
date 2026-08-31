@@ -1,0 +1,23 @@
+{%- comment -%}
+  Resolves where and when one meetup happens, falling back to site.venue / site.meeting.
+
+  Sets, for the caller to read: venue_name, venue_address, venue_map, meetup_hours.
+  Liquid's `assign` writes to the outermost scope, so these survive the include; this is
+  the one place the venue defaults are applied.
+
+  `location:` front matter may be either a mapping (name / address / map, each optional
+  and independently defaulted) or a plain string, which is treated as the whole address.
+
+  Params: post
+{%- endcomment -%}
+{%- assign loc = include.post.location -%}
+{%- if loc and loc.name == nil and loc.address == nil and loc.map == nil -%}
+  {%- assign venue_name = nil -%}
+  {%- assign venue_address = loc -%}
+  {%- assign venue_map = nil -%}
+{%- else -%}
+  {%- assign venue_name = loc.name | default: site.venue.name -%}
+  {%- assign venue_address = loc.address | default: site.venue.address -%}
+  {%- assign venue_map = loc.map | default: site.venue.map -%}
+{%- endif -%}
+{%- assign meetup_hours = include.post.time | default: site.meeting.time -%}

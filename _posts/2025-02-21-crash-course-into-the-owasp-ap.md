@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Crash Course into the OWASP API Top 10"
 date: 2025-02-21
 presenter: "Alan Shen"

@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Hacker Summer Camp Recap and Highlights"
 date: 2024-08-23
 presenter: "Mark Hoopes"

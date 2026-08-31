@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Hardware Hacking for the Young and Old"
 date: 2024-06-28
 presenter: "Josh Datko"

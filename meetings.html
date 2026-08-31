@@ -1,0 +1,24 @@
+---
+layout: null
+---
+{%- comment -%}
+  The meetings page moved to /meetings/ when it gained pagination (jekyll-paginate needs
+  the paginated page to be an index.html inside the directory named by `paginate_path`).
+  This stub keeps every link that ever pointed at /meetings.html working. Plain HTML
+  meta-refresh, no JavaScript, with a visible link for anything that ignores it.
+{%- endcomment -%}
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url={{ '/meetings/' | relative_url }}">
+  <link rel="canonical" href="{{ '/meetings/' | absolute_url }}">
+  <title>meetings — {{ site.title }}</title>
+</head>
+
+<body>
+  <p>the meetings page moved to <a href="{{ '/meetings/' | relative_url }}">{{ '/meetings/' | absolute_url }}</a>.</p>
+</body>
+
+</html>

@@ -1,5 +1,4 @@
 ﻿---
-layout: default
 title: "mantis"
 date: 2004-08-15
 ---

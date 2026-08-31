@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "API Security Exercises with crAPI and vAPI"
 date: 2023-03-24
 ---

@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "mantis => some challenges..."
 date: 2010-04-16
 ---

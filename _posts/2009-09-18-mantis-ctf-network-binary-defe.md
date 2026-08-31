@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "mantis => CTF network/binary defense"
 date: 2009-09-18
 ---

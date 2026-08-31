@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Open Source Industrial Control: Turning 2,800 Tons of Metal with Python and Flask"
 date: 2024-04-26
 presenter: "Jacob Lapenna"

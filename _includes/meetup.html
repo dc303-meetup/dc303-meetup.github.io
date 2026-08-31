@@ -1,0 +1,33 @@
+{%- comment -%}
+  One meetup entry.
+
+  Params:
+    post    (required) a document from site.posts
+    badge   (optional) short label shown in the box header, e.g. "next meeting"
+    boxed   (optional) "true" to draw the full terminal box around it
+    past    (optional) "true" for a concluded meeting — drops the when / where / rsvp
+            logistics, which no longer apply, and shows just the presenter under the title
+{%- endcomment -%}
+{%- assign post = include.post -%}
+{%- include venue.html post=post -%}
+<article class="meetup{% if include.boxed %} meetup--boxed{% endif %}">
+  {%- if include.badge %}
+  <p class="meetup__badge">{{ include.badge }}</p>
+  {%- endif %}
+  <h3 class="meetup__title">
+    <time class="meetup__date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <span class="meetup__name">{{ post.title }}</span>
+  </h3>
+  {%- if include.past -%}
+    {%- if post.presenter %}
+  <p class="meetup__presenter"><span class="muted">presenter:</span> {{ post.presenter }}</p>
+    {%- endif -%}
+  {%- else %}
+  {%- include meetup-meta.html post=post %}
+  {%- endif %}
+  {%- if post.content and post.content != "" %}
+  <div class="meetup__body">
+    {{ post.content | markdownify }}
+  </div>
+  {%- endif %}
+</article>

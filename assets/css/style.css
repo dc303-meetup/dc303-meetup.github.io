@@ -1,21 +1,410 @@
-* {
-  box-sizing: border-box;
+/* =============================================================================
+   dc303 — phosphor terminal stylesheet
+   Mobile-first. One file, no resets beyond box-sizing, no !important.
+   Every colour pair below is checked against WCAG AA on --bg (ratios noted inline).
+   ============================================================================= */
+
+/* --- tokens --------------------------------------------------------------- */
+:root {
+  --bg:        #050a05;  /* near-black phosphor tube                          */
+  --fg:        #7dd67d;  /* body text          11.2:1 on --bg  (AA)           */
+  --fg-bright: #c2ffc2;  /* headings           17.5:1 on --bg  (AA)           */
+  --link:      #5ce65c;  /* links              12.3:1 on --bg  (AA)           */
+  --muted:     #6fa86f;  /* secondary text      7.1:1 on --bg  (AA)           */
+  --rule:      #3a6b3a;  /* borders             3.2:1 on --bg  (AA non-text)  */
+  --focus:     #c2ffc2;
+
+  --mono: ui-monospace, "Courier New", courier, monospace;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+
+  --measure: 72ch;   /* comfortable line length for prose */
+  --shell:   62rem;  /* outer page width                  */
 }
-body { background-color: black; text-align: left; font-family: courier, monospace; margin: 0; padding: 0; } 
-#container {
-  margin: 0 auto;
-  width: 90%;
-  max-width: 1200px;
-} 
-a { color: lime; font-weight: bold; }
-p { color: lime; margin-top: 0; margin-bottom: 1em; }
+
+/* Brighter phosphor and heavier rules for readers who ask for more contrast. */
+@media (prefers-contrast: more) {
+  :root {
+    --bg:        #000000;
+    --fg:        #b6ffb6;
+    --fg-bright: #e6ffe6;
+    --link:      #9dff9d;
+    --muted:     #9be89b;
+    --rule:      #7dd67d;
+  }
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none; }
+
+/* --- base ----------------------------------------------------------------- */
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 var(--space-3) var(--space-5);
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+body > * {
+  max-width: var(--shell);
+  margin-inline: auto;
+}
+
+p, li, dd { max-width: var(--measure); }
+
+p { margin: 0 0 var(--space-3); }
 p:last-child { margin-bottom: 0; }
-td { color: lime; padding: 10px; vertical-align: top; overflow-wrap: break-word; }
-table { padding: 15px; border: 0px; width: 100%; border-collapse: collapse; margin-bottom: 2em; }
-#nav-table { margin-bottom: 30px; }
-#nav-table td { text-align: center; width: auto; }
-.content-table { table-layout: fixed; }
-.content-table td:first-child { width: 150px; }
-@media (max-width: 600px) {
-  .content-table td:first-child { width: 100px; }
+
+h1, h2, h3 {
+  color: var(--fg-bright);
+  font-family: var(--mono);
+  font-weight: bold;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+}
+
+h1 { font-size: 1.5rem; margin: 0 0 var(--space-4); }
+h2 { font-size: 1.2rem; margin: 0 0 var(--space-3); }
+h3 { font-size: 1.05rem; margin: 0 0 var(--space-2); }
+
+a { color: var(--link); }
+a:hover { color: var(--fg-bright); }
+
+code, kbd { color: var(--fg-bright); overflow-wrap: anywhere; }
+
+kbd {
+  border: 1px solid var(--rule);
+  padding: 0 var(--space-1);
+}
+
+/* Post bodies carry pasted URLs and sample hashes that are single unbreakable "words".
+   Let them break, and let code blocks scroll inside their own box, so the page itself
+   never scrolls sideways at 375px. */
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  border-left: 2px solid var(--rule);
+  padding: var(--space-2) var(--space-3);
+}
+
+pre code { overflow-wrap: normal; }
+
+img { max-width: 100%; height: auto; }
+
+.muted { color: var(--muted); }
+
+/* Focus is never removed, only replaced — the outline has to survive on black. */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* --- skip link ------------------------------------------------------------ */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  padding: var(--space-2) var(--space-3);
+}
+
+.skip-link:focus {
+  left: var(--space-3);
+  top: var(--space-2);
+  z-index: 10;
+}
+
+/* --- banner + nav --------------------------------------------------------- */
+.banner {
+  border-bottom: 1px solid var(--rule);
+  padding: var(--space-3) 0;
+  margin-bottom: var(--space-4);
+}
+
+.banner__brand {
+  margin: 0 0 var(--space-2);
+  max-width: none;
+  color: var(--fg-bright);
+}
+
+.banner__brand a { text-decoration: none; font-weight: bold; }
+.banner__brand a:hover { text-decoration: underline; }
+
+.nav__summary {
+  display: block;
+  cursor: pointer;
+  padding: var(--space-2) var(--space-3);
+  min-height: 2.75rem;      /* 44px at the default font size */
+  line-height: 1.75;
+  border: 1px solid var(--rule);
+  color: var(--fg-bright);
+  width: max-content;
+}
+
+.nav__summary::before { content: "[ " / ""; color: var(--muted); }
+.nav__summary::after  { content: " ]" / "";  color: var(--muted); }
+
+.nav__list {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  max-width: none;
+}
+
+.nav__item { max-width: none; }
+
+/* Full-width rows on touch screens: at least 44px tall, nothing to fat-finger. */
+.nav__link {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  min-height: 2.75rem;
+  line-height: 1.75;
+  font-size: 1rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav__link:hover,
+.nav__link:focus-visible { text-decoration: underline; }
+
+.nav__link[aria-current="page"] { color: var(--fg-bright); }
+.nav__link[aria-current="page"]::before { content: "> " / ""; color: var(--muted); }
+
+/* Hotkey marks are dropped where nobody can press them. Decided by input device and
+   viewport further down, never by sniffing the user agent. */
+.nav__link b { font-weight: inherit; }
+
+.footer .nav__list { border-top: 1px solid var(--rule); }
+
+/* --- content -------------------------------------------------------------- */
+.page-title::before   { content: "> " / "";  color: var(--muted); }
+.section__title::before { content: ":: " / ""; color: var(--muted); }
+
+.section { margin: 0 0 var(--space-5); }
+
+.notice {
+  border-left: 2px solid var(--rule);
+  padding-left: var(--space-3);
+  color: var(--muted);
+}
+
+/* --- definition lists (facts, meetup meta) -------------------------------- */
+.facts, .meetup__meta { margin: 0 0 var(--space-3); }
+
+.facts__row, .meetup__field {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 var(--space-3);
+  padding: var(--space-1) 0;
+}
+
+.facts dt, .meetup__meta dt { color: var(--muted); }
+.facts dt::after, .meetup__meta dt::after { content: ":" / ""; }
+.facts dd, .meetup__meta dd { margin: 0; }
+
+/* --- meetup entries ------------------------------------------------------- */
+.meetup {
+  border-left: 2px solid var(--rule);
+  padding: 0 0 0 var(--space-3);
+  margin: 0 0 var(--space-4);
+}
+
+.meetup__badge {
+  margin: 0 0 var(--space-2);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  max-width: none;
+}
+
+/* The next meeting gets the full terminal box, its label sitting in the top rule the
+   way a BBS panel legend does. */
+.meetup--boxed {
+  position: relative;
+  border: 1px solid var(--rule);
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.meetup--boxed .meetup__badge {
+  position: absolute;
+  top: 0;
+  left: var(--space-3);
+  transform: translateY(-50%);
+  background: var(--bg);
+  padding: 0 var(--space-2);
+  color: var(--fg-bright);
+}
+
+.meetup--solo { border-left: 0; padding-left: 0; }
+
+/* Plain inline flow rather than flex: a flex item will not shrink below its min-content
+   width, which pushed long talk titles off-screen at 200% zoom. Inline text just wraps. */
+.meetup__title {
+  margin-bottom: var(--space-3);
+  overflow-wrap: break-word;
+}
+
+.meetup__date { color: var(--muted); font-weight: normal; }
+.meetup__date::after { content: "  ·  " / ""; white-space: pre; }
+
+.meetup__presenter { margin: 0 0 var(--space-3); }
+
+.meetup__body { overflow-wrap: break-word; }
+.meetup__body > :first-child { margin-top: 0; }
+.meetup__body > :last-child { margin-bottom: 0; }
+.meetup__body ul, .meetup__body ol { padding-left: 1.5em; max-width: var(--measure); }
+.meetup__body a { overflow-wrap: anywhere; }
+
+/* --- pager (numbered pages on the meetings archive) ----------------------- */
+/* Plain links in a numbered list: with CSS or JS gone it still reads "1 2 3 ...".
+   Each item is a 44px tap target, and the current page is a <span>, not a link, so
+   nothing focusable points at the page you are already on. */
+.pager { margin-top: var(--space-4); }
+
+.pager__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  margin: 0;
+  padding: 0;
+}
+
+.pager__item { max-width: none; }
+
+.pager__link,
+.pager__current {
+  display: inline-block;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: var(--space-2);
+  text-align: center;
+}
+
+.pager__current {
+  color: var(--fg-bright);
+  border: 1px solid var(--rule);
+}
+
+.pager__current::before { content: "[" / ""; color: var(--muted); }
+.pager__current::after  { content: "]" / ""; color: var(--muted); }
+
+/* --- faq ------------------------------------------------------------------
+   Answers are always visible: nobody should have to click to find out whether the
+   door being locked is a problem. Questions are real headings, so screen-reader and
+   browser heading navigation can jump between them. */
+.faq__item {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.faq__item:last-child { border-bottom: 0; }
+
+.faq__q { margin: 0 0 var(--space-2); }
+.faq__q::before { content: "? " / ""; color: var(--muted); }
+.faq__a { margin: 0; }
+
+/* --- shortcuts (native disclosure, zero script) --------------------------- */
+.shortcuts {
+  border-bottom: 1px solid var(--rule);
+  margin: var(--space-4) 0;
+}
+
+.shortcuts__summary {
+  cursor: pointer;
+  color: var(--fg-bright);
+  padding: var(--space-2) 0;
+  min-height: 2.75rem;
+  line-height: 1.75;
+}
+.shortcuts__list { margin: 0 0 var(--space-3); }
+
+.shortcuts__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 var(--space-3);
+  padding: var(--space-1) 0;
+}
+
+.shortcuts__row dd { margin: 0; }
+
+/* --- plain lists ---------------------------------------------------------- */
+.topics, .contacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.topics li::before, .contacts li::before { content: "- " / ""; color: var(--muted); }
+
+/* --- footer --------------------------------------------------------------- */
+.footer {
+  border-top: 1px solid var(--rule);
+  margin-top: var(--space-5);
+  padding-top: var(--space-3);
+}
+
+.footer__meta { color: var(--muted); font-size: 0.9rem; }
+
+/* --- wide screens --------------------------------------------------------- */
+@media (min-width: 40em) {
+  body { padding-inline: var(--space-4); }
+
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.35rem; }
+
+  /* Force the disclosure open and retire its button so desktop shows the whole menu
+     bar. ::details-content covers current engines; the display rule on the list covers
+     older ones. If both ever failed, the menu simply stays a tappable button — it never
+     disappears, and no JavaScript is involved either way. */
+  .nav__details::details-content {
+    display: block;
+    content-visibility: visible;
+  }
+
+  .nav__summary { display: none; }
+
+  .nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-4);
+    margin-top: 0;
+  }
+
+  .nav__link {
+    padding: var(--space-1) 0;
+    min-height: 0;
+    border-bottom: 0;
+  }
+
+  .footer .nav__list { border-top: 0; }
+
+  .facts__row, .meetup__field { grid-template-columns: 11ch 1fr; }
+  .shortcuts__row { grid-template-columns: 10ch 1fr; }
+}
+
+/* A hotkey is only worth marking where there is a keyboard to press it on. */
+@media (min-width: 40em) and (pointer: fine) {
+  .nav__link b { font-weight: bold; color: var(--fg-bright); }
+}
+
+/* --- motion --------------------------------------------------------------- */
+/* There is no decorative motion on this site at all. This only tames the smooth
+   scrolling that the keyboard shortcuts would otherwise use. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

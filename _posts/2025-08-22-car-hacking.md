@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Car Hacking"
 date: 2025-08-22
 presenter: "Specters"

@@ -1,17 +1,20 @@
 ---
 layout: default
-title: dc303 - contacts
+title: contact
+heading: contact
+description: how to reach the dc303 organizers.
 ---
 
-<table class="content-table">
-  <tbody>
-    <tr>
-      <td>&nbsp;</td>
-      <td>sunzenshen { at } gmail.com</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>mantis1 { at } gmail.com</td>
-    </tr>
-  </tbody>
-</table>
+<section class="section" aria-labelledby="reach-heading">
+  <h2 id="reach-heading" class="section__title">reach the organizers</h2>
+  <ul class="contacts">
+    <li>sunzenshen { at } gmail.com</li>
+    <li>ashen { at } denhac.org</li>
+    <li>mantis1 { at } gmail.com</li>
+  </ul>
+  <br>
+  <p>
+    talk proposals are always welcome:<br>
+    pitch us anything you are working on.
+  </p>
+</section>

@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "COME LEARN ABOUT WIFI HACKING!"
 date: 2024-11-22
 presenter: "Neko"

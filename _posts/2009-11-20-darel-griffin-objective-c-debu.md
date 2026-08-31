@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Darel Griffin => objective C, debugging and reversing"
 date: 2009-11-20
 ---

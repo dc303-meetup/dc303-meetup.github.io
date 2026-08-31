@@ -1,5 +1,4 @@
 ﻿---
-layout: default
 title: "mantis => reverse engineering challenge"
 date: 2009-01-15
 ---

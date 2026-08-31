@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "A new tool/technique: SILENTTRINITY"
 date: 2018-10-26
 ---

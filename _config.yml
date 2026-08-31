@@ -1,7 +1,51 @@
 title: dc303
-description: Denver DEFCON group
-url: "https://dc303-meetup.github.io"
+tagline: denver defcon group
+description: the defcon group for denver, colorado. monthly meetups at denhac.
+url: "https://dc303.org"
 rss_path: "feed.xml"
 markdown: kramdown
+lang: en
+
+# Build future-dated posts. Required by the "upcoming meetings" logic — do not remove.
 future: true
+
 repository: dc303-meetup/dc303-meetup.github.io
+
+# Pagination for the meetings archive. jekyll-paginate ships with the github-pages gem
+# and is enabled by default there; it is listed explicitly so a plain `jekyll build`
+# (the docker CI job, or a local install without the github-pages bundle) behaves the
+# same. The plugin's only job here is to *generate* /meetings/page2/, /meetings/page3/,
+# ... from meetings/index.html — the page ignores `paginator.posts` (which counts
+# upcoming meetups too) and slices the past list itself in _includes/meetups.html.
+plugins:
+  - jekyll-paginate
+
+paginate: 10
+paginate_path: "/meetings/page:num/"
+
+# Default venue. A post may override any of this with its own `location:` front matter.
+venue:
+  name: denhac
+  address: 700 Kalamath Street, Denver, CO 80204
+  map: https://goo.gl/maps/MpdMuZzYNDp
+
+# Default meeting cadence and hours. A post may override the hours with `time:`.
+meeting:
+  schedule: typically 4th fridays (alternative dates can be arranged for speakers)
+  time: 7-9 pm
+
+# Obfuscated on purpose: keeps the invite out of scrapers. Do not expand it to a live link.
+discord_encoded: ZGlzY28gcmQge2RvdH0gZ2d7c2xhc2h9Q2FKV2pVZ3FFVg==
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: meetup
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor

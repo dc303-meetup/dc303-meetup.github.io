@@ -1,0 +1,45 @@
+{%- comment -%}
+  The when / presenter / where / rsvp block for one meetup. Split out so the list cards
+  and the single-meetup page describe a meetup identically.
+
+  Expects venue.html to have run for this post (meetup.html and the meetup layout both
+  do that first).
+
+  Params:
+    post      (required)
+    showdate  (optional) "true" to include the date, for pages with no date in the heading
+{%- endcomment -%}
+{%- assign post = include.post -%}
+<dl class="meetup__meta">
+  <div class="meetup__field">
+    <dt>when</dt>
+    <dd>
+      {%- if include.showdate %}<time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%Y-%m-%d" }}</time>, {% endif -%}
+      {{ post.date | date: "%a" | downcase }} {{ meetup_hours }}
+    </dd>
+  </div>
+  {%- if post.presenter %}
+  <div class="meetup__field">
+    <dt>presenter</dt>
+    <dd>{{ post.presenter }}</dd>
+  </div>
+  {%- endif %}
+  <div class="meetup__field">
+    <dt>where</dt>
+    <dd>
+      {%- if venue_map -%}
+        <a href="{{ venue_map }}">{{ venue_name }}</a>
+      {%- elsif venue_name -%}
+        {{ venue_name }}
+      {%- endif -%}
+      {%- if venue_name and venue_address %}, {% endif -%}
+      {{ venue_address }}
+    </dd>
+  </div>
+  {%- if post.rsvp %}
+  <div class="meetup__field">
+    <dt>rsvp</dt>
+    <dd><a href="{{ post.rsvp }}">meetup.com event page</a> <span class="muted">(optional)</span></dd>
+  </div>
+  {%- endif %}
+</dl>

@@ -1,8 +1,7 @@
 ---
-layout: default
-title: "good time binary analysis"
+title: "good time binary analysis (radare)"
 date: 2009-08-21
-presenter: "syndrowm => radare"
+presenter: "syndrowm"
 ---
 
 http://radare.nopcode.org/new/

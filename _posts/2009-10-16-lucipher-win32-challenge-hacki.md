@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "lucipher => win32 challenge: hacking game servers"
 date: 2009-10-16
 ---

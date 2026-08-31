@@ -1,5 +1,4 @@
 ﻿---
-layout: default
 title: "mantis => insecure programming"
 date: 2006-05-15
 ---

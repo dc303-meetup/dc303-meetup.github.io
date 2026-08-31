@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "A Web CTF For Everyone"
 date: 2025-01-24
 presenter: "Mark Hoopes"

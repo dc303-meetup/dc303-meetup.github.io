@@ -1,0 +1,111 @@
+{%- comment -%}
+  The single source of truth for "which meetups are upcoming".
+
+  A meetup counts as upcoming through the end of its own calendar day, so we compare
+  YYYYMMDD as integers rather than raw timestamps. "Now" is build time (site.time); the
+  footer prints the build date so a stale page is self-evident.
+
+  The clock is rolled back 7 hours before the build date is taken. Posts carry a bare
+  date (midnight), but meetings run 19:00-22:00 Mountain, and the builder's clock may be
+  UTC (GitHub Pages) or Mountain (a laptop). The shift keeps a meeting listed through its
+  own evening under either clock. It errs by listing a meetup for a few hours past
+  midnight, which is the harmless direction — a meeting must never vanish from the front
+  page while it is still happening.
+
+  NOTE: Liquid has no array-append filter (`push` does not exist and silently yields nil),
+  so the split is done with plain loops over site.posts instead of building two arrays.
+  site.posts is newest-first, so `reverse` gives ascending order.
+
+  Params:
+    show  "upcoming" (default) — upcoming only, falling back to the last meeting held.
+          "both"               — upcoming (no fallback) plus one page of past meetings.
+          "past"               — one page of past meetings only.
+    page  which page of the past list to render (1-based). Only read for "both"/"past".
+
+  The past list is paginated `site.paginate` at a time. It slices the past posts itself
+  rather than using `paginator.posts`, which counts upcoming meetups too and would leave
+  page 1 short; jekyll-paginate only exists here to generate the extra page files. That
+  means the pager can link a page the plugin did not generate if the two counts ever
+  disagree by a whole page — they cannot, because the plugin always pages over at least
+  as many posts as this does.
+{%- endcomment -%}
+{%- assign today = site.time | date: '%s' | minus: 25200 | date: '%Y%m%d' | plus: 0 -%}
+{%- assign chrono = site.posts | reverse -%}
+
+{%- if include.show != "past" -%}
+{%- assign upcoming_count = 0 -%}
+{%- for post in chrono -%}
+  {%- assign day = post.date | date: '%Y%m%d' | plus: 0 -%}
+  {%- if day >= today -%}{%- assign upcoming_count = upcoming_count | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+
+<section class="section" aria-labelledby="upcoming-heading">
+  <h2 id="upcoming-heading" class="section__title">upcoming meetings</h2>
+
+  {%- if upcoming_count > 0 -%}
+    {%- assign shown = 0 -%}
+    {%- for post in chrono -%}
+      {%- assign day = post.date | date: '%Y%m%d' | plus: 0 -%}
+      {%- if day >= today -%}
+        {%- assign shown = shown | plus: 1 -%}
+        {%- if shown == 1 %}
+    {% include meetup.html post=post badge="next meeting" boxed=true %}
+        {%- else %}
+    {% include meetup.html post=post badge="also coming up" %}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor %}
+  {%- else %}
+    <p class="notice">agenda clear — <a href="{{ '/contacts.html' | relative_url }}">contact us</a> to pitch your talk!</p>
+    {%- if include.show != "both" -%}
+      {%- assign last_meeting = site.posts.first -%}
+      {%- if last_meeting %}
+    {% include meetup.html post=last_meeting badge="last meeting" %}
+      {%- endif -%}
+    {%- endif %}
+  {%- endif %}
+</section>
+{%- endif -%}
+
+{%- if include.show == "both" or include.show == "past" %}
+{%- assign per_page = site.paginate | default: 10 | plus: 0 -%}
+{%- assign page_num = include.page | default: 1 | plus: 0 -%}
+{%- assign first_index = page_num | minus: 1 | times: per_page -%}
+{%- assign last_index = first_index | plus: per_page -%}
+{%- assign past_count = 0 -%}
+<section class="section" aria-labelledby="past-heading">
+  <h2 id="past-heading" class="section__title">past meetings</h2>
+  {%- for post in site.posts -%}
+    {%- assign day = post.date | date: '%Y%m%d' | plus: 0 -%}
+    {%- if day < today -%}
+      {%- if past_count >= first_index and past_count < last_index %}
+  {% include meetup.html post=post past=true %}
+      {%- endif -%}
+      {%- assign past_count = past_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- comment -%} ceil(past_count / per_page), integer-only. {%- endcomment -%}
+  {%- assign total_pages = past_count | plus: per_page | minus: 1 | divided_by: per_page -%}
+  {%- if total_pages > 1 %}
+  <nav class="pager" aria-label="past meetings, page {{ page_num }} of {{ total_pages }}">
+    <ol class="pager__list">
+      {%- for n in (1..total_pages) -%}
+        {%- if n == 1 -%}
+          {%- assign page_url = '/meetings/' | relative_url -%}
+        {%- else -%}
+          {%- assign page_url = site.paginate_path | replace: ':num', n | relative_url -%}
+        {%- endif %}
+      <li class="pager__item">
+        {%- if n == page_num -%}
+        <span class="pager__current" aria-current="page">{{ n }}</span>
+        {%- else -%}
+        <a class="pager__link" href="{{ page_url }}" aria-label="page {{ n }}">{{ n }}</a>
+        {%- endif -%}
+      </li>
+      {%- endfor %}
+    </ol>
+  </nav>
+  {%- endif %}
+</section>
+{%- endif -%}

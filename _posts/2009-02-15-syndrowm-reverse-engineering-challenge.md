@@ -1,5 +1,4 @@
 ﻿---
-layout: default
 title: "syndrowm => reverse engineering challenge"
 date: 2009-02-15
 ---

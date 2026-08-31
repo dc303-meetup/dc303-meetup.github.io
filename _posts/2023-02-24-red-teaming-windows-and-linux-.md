@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Red Teaming: Windows and Linux Persistence Techniques"
 date: 2023-02-24
 ---

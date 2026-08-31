@@ -1,8 +1,7 @@
 ---
-layout: default
 title: "Reversing Bad Brew"
 date: 2026-05-22
-presenter: _
+presenter: Emma
 rsvp: https://www.meetup.com/denhac-hackerspace/events/314695090/
 ---
 

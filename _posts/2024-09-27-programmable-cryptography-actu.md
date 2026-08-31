@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Programmable Cryptography: Actualizing Academic Innovation for Novel Technology"
 date: 2024-09-27
 presenter: "Nuke"

@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Intro to CDX: A cybersecurity training range built for real learning"
 date: 2026-02-27
 presenter: Q

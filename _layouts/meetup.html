@@ -1,0 +1,17 @@
+---
+layout: default
+---
+{%- comment -%}
+  A single meetup's permalink page — where the RSS feed and search engines land. The
+  default layout has already printed the title as the <h1>, so this only adds the facts
+  and the write-up.
+{%- endcomment -%}
+{%- include venue.html post=page -%}
+<div class="meetup meetup--solo">
+  {%- include meetup-meta.html post=page showdate=true %}
+  <div class="meetup__body">
+    {{ content }}
+  </div>
+</div>
+
+<p class="notice"><a href="{{ '/meetings/' | relative_url }}">all meetings</a></p>

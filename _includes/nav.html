@@ -1,0 +1,42 @@
+{%- comment -%}
+  BBS-style command menu, rendered from _data/nav.yml.
+
+  The first letter of each label is wrapped in <b> to mark its hotkey. <b> is stylistic
+  offset with no implied importance, so screen readers stay quiet about it; CSS drops the
+  bolding on touch/small screens, where a hotkey nobody can press is just noise.
+
+  Params:
+    label        aria-label for the <nav> ("main" / "secondary")
+    collapsible  "true" to wrap the list in <details> so it collapses on narrow screens
+{%- endcomment -%}
+<nav class="nav{% if include.collapsible %} nav--collapsible{% endif %}" aria-label="{{ include.label | default: 'main' }}">
+  {%- if include.collapsible -%}
+  <details class="nav__details">
+    <summary class="nav__summary">menu</summary>
+  {%- endif %}
+    <ul class="nav__list">
+      {%- for item in site.data.nav %}
+      {%- comment -%}
+        A section is current on its own url and on anything under it, so the paginated
+        /meetings/page2/ still marks "meetings". "/" would prefix-match everything, so it
+        only ever matches exactly.
+      {%- endcomment -%}
+      {%- assign is_current = false -%}
+      {%- if page.url == item.url -%}
+        {%- assign is_current = true -%}
+      {%- elsif item.url != "/" and page.url contains item.url -%}
+        {%- assign is_current = true -%}
+      {%- endif %}
+      <li class="nav__item">
+        <a class="nav__link"
+           href="{{ item.url | relative_url }}"
+           data-key="{{ item.key }}"
+           aria-keyshortcuts="{{ item.key }}"
+           {% if is_current %}aria-current="page"{% endif %}><b>{{ item.label | slice: 0 }}</b>{{ item.label | slice: 1, 40 }}</a>
+      </li>
+      {%- endfor %}
+    </ul>
+  {%- if include.collapsible -%}
+  </details>
+  {%- endif -%}
+</nav>

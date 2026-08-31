@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Luke Arntson => DLL injection (Windows)"
 date: 2009-04-24
 ---

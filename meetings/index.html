@@ -1,0 +1,56 @@
+---
+layout: default
+title: meetings
+heading: meetings
+description: upcoming and past dc303 meetups, with talk topics and presenters.
+---
+
+{%- comment -%}
+  Page 1 of the meetings archive, and — via jekyll-paginate and `paginate_path` in
+  _config.yml — the template for /meetings/page2/, /meetings/page3/, ...
+
+  `paginator` is only there to tell us which page this is; the past-meetings slice and
+  the numbered pager are computed in _includes/meetups.html from the past posts alone.
+  The upcoming meetups and the talk-ideas list belong to page 1 only: repeating them on
+  every page of a fourteen-page archive would bury the history they sit on top of.
+{%- endcomment -%}
+{%- assign page_num = paginator.page | default: 1 -%}
+
+<section class="section" aria-labelledby="details-heading">
+  <h2 id="details-heading" class="section__title">where &amp; when</h2>
+  <dl class="facts">
+    <div class="facts__row">
+      <dt>where</dt>
+      <dd><a href="{{ site.venue.map }}">{{ site.venue.name }}</a>, {{ site.venue.address }}</dd>
+    </div>
+    <div class="facts__row">
+      <dt>when</dt>
+      <dd>{{ site.meeting.schedule }}, {{ site.meeting.time }}</dd>
+    </div>
+    <div class="facts__row">
+      <dt>discord</dt>
+      <dd>join the community on discord — decode: <code>{{ site.discord_encoded }}</code></dd>
+    </div>
+    <div class="facts__row">
+      <dt>topics</dt>
+      <dd>
+        we encourage members to be active and contribute to the group. if you have a
+        meeting topic or idea, propose it in the discord channel or
+        <a href="{{ '/contacts.html' | relative_url }}">contact us</a> directly.
+      </dd>
+    </div>
+  </dl>
+</section>
+
+{% if page_num == 1 %}{% include meetups.html show="both" page=page_num %}{% else %}{% include meetups.html show="past" page=page_num %}{% endif %}
+
+{%- if page_num == 1 %}
+<section class="section" aria-labelledby="ideas-heading">
+  <h2 id="ideas-heading" class="section__title">talk ideas looking for a presenter</h2>
+  <ul class="topics">
+    {%- for topic in site.data.topics %}
+    <li>{{ topic }}</li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
