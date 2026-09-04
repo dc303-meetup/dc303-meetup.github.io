@@ -267,12 +267,6 @@ img { max-width: 100%; height: auto; }
 
 .meetup__presenter { margin: 0 0 var(--space-3); }
 
-/* Canonical link on a single talk's page, for a speaker to copy and share. */
-.meetup__share {
-  margin-top: var(--space-4);
-  overflow-wrap: anywhere;
-}
-
 .meetup__body { overflow-wrap: break-word; }
 .meetup__body > :first-child { margin-top: 0; }
 .meetup__body > :last-child { margin-bottom: 0; }

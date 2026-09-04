@@ -5,10 +5,6 @@ layout: default
   A single meetup's permalink page — where the RSS feed and search engines land. The
   default layout has already printed the title as the <h1>, so this only adds the facts
   and the write-up.
-
-  The share line prints this talk's own canonical URL as plain, copyable text: a speaker
-  who wants to point people at their talk lands here from the clickable title on the
-  meetings list, then copies the link.
 {%- endcomment -%}
 {%- include venue.html post=page -%}
 <div class="meetup meetup--solo">
@@ -17,7 +13,5 @@ layout: default
     {{ content }}
   </div>
 </div>
-
-<p class="meetup__share"><span class="muted">share this talk:</span> <a href="{{ page.url | relative_url }}">{{ page.url | absolute_url }}</a></p>
 
 <p class="notice"><a href="{{ '/meetings/' | relative_url }}">all meetings</a></p>
