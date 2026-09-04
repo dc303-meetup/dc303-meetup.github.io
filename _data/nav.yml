@@ -1,20 +1,13 @@
-# Site navigation. `key` is the single-letter hotkey; it must match the first letter of
-# `label` so the bolded letter in the menu is the key you actually press.
-- key: h
-  label: home
+# Site navigation, in menu order.
+- label: home
   url: /
-- key: m
-  label: meetings
+- label: meetings
   url: /meetings/
-- key: f
-  label: faq
+- label: faq
   url: /faq.html
-- key: r
-  label: rss
+- label: rss
   url: /feed.xml
-- key: l
-  label: list
+- label: list
   url: /list.html
-- key: c
-  label: contact
+- label: contact
   url: /contacts.html

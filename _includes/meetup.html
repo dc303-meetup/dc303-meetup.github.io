@@ -16,7 +16,7 @@
   {%- endif %}
   <h3 class="meetup__title">
     <time class="meetup__date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%Y-%m-%d" }}</time>
-    <span class="meetup__name">{{ post.title }}</span>
+    <span class="meetup__name"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></span>
   </h3>
   {%- if include.past -%}
     {%- if post.presenter %}

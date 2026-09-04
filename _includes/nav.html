@@ -1,10 +1,6 @@
 {%- comment -%}
   BBS-style command menu, rendered from _data/nav.yml.
 
-  The first letter of each label is wrapped in <b> to mark its hotkey. <b> is stylistic
-  offset with no implied importance, so screen readers stay quiet about it; CSS drops the
-  bolding on touch/small screens, where a hotkey nobody can press is just noise.
-
   Params:
     label        aria-label for the <nav> ("main" / "secondary")
     collapsible  "true" to wrap the list in <details> so it collapses on narrow screens
@@ -30,9 +26,7 @@
       <li class="nav__item">
         <a class="nav__link"
            href="{{ item.url | relative_url }}"
-           data-key="{{ item.key }}"
-           aria-keyshortcuts="{{ item.key }}"
-           {% if is_current %}aria-current="page"{% endif %}><b>{{ item.label | slice: 0 }}</b>{{ item.label | slice: 1, 40 }}</a>
+           {% if is_current %}aria-current="page"{% endif %}>{{ item.label }}</a>
       </li>
       {%- endfor %}
     </ul>

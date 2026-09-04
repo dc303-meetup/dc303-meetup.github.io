@@ -181,10 +181,6 @@ img { max-width: 100%; height: auto; }
 .nav__link[aria-current="page"] { color: var(--fg-bright); }
 .nav__link[aria-current="page"]::before { content: "> " / ""; color: var(--muted); }
 
-/* Hotkey marks are dropped where nobody can press them. Decided by input device and
-   viewport further down, never by sniffing the user agent. */
-.nav__link b { font-weight: inherit; }
-
 .footer .nav__list { border-top: 1px solid var(--rule); }
 
 /* --- content -------------------------------------------------------------- */
@@ -260,7 +256,22 @@ img { max-width: 100%; height: auto; }
 .meetup__date { color: var(--muted); font-weight: normal; }
 .meetup__date::after { content: "  ·  " / ""; white-space: pre; }
 
+/* The title links to the talk's own page. It keeps the bright heading colour and only
+   underlines on hover / focus, so it reads as a heading first and a link second. */
+.meetup__name a {
+  color: inherit;
+  text-decoration: none;
+}
+.meetup__name a:hover,
+.meetup__name a:focus-visible { text-decoration: underline; }
+
 .meetup__presenter { margin: 0 0 var(--space-3); }
+
+/* Canonical link on a single talk's page, for a speaker to copy and share. */
+.meetup__share {
+  margin-top: var(--space-4);
+  overflow-wrap: anywhere;
+}
 
 .meetup__body { overflow-wrap: break-word; }
 .meetup__body > :first-child { margin-top: 0; }
@@ -318,30 +329,6 @@ img { max-width: 100%; height: auto; }
 .faq__q::before { content: "? " / ""; color: var(--muted); }
 .faq__a { margin: 0; }
 
-/* --- shortcuts (native disclosure, zero script) --------------------------- */
-.shortcuts {
-  border-bottom: 1px solid var(--rule);
-  margin: var(--space-4) 0;
-}
-
-.shortcuts__summary {
-  cursor: pointer;
-  color: var(--fg-bright);
-  padding: var(--space-2) 0;
-  min-height: 2.75rem;
-  line-height: 1.75;
-}
-.shortcuts__list { margin: 0 0 var(--space-3); }
-
-.shortcuts__row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0 var(--space-3);
-  padding: var(--space-1) 0;
-}
-
-.shortcuts__row dd { margin: 0; }
-
 /* --- plain lists ---------------------------------------------------------- */
 .topics, .contacts {
   list-style: none;
@@ -394,17 +381,11 @@ img { max-width: 100%; height: auto; }
   .footer .nav__list { border-top: 0; }
 
   .facts__row, .meetup__field { grid-template-columns: 11ch 1fr; }
-  .shortcuts__row { grid-template-columns: 10ch 1fr; }
-}
-
-/* A hotkey is only worth marking where there is a keyboard to press it on. */
-@media (min-width: 40em) and (pointer: fine) {
-  .nav__link b { font-weight: bold; color: var(--fg-bright); }
 }
 
 /* --- motion --------------------------------------------------------------- */
-/* There is no decorative motion on this site at all. This only tames the smooth
-   scrolling that the keyboard shortcuts would otherwise use. */
+/* There is no decorative motion on this site at all. This only forces the "auto"
+   default in case a future style opts into smooth scrolling. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }

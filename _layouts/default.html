@@ -25,14 +25,11 @@
 
   <footer class="footer">
     {% include nav.html label="secondary" %}
-    {% include shortcuts.html %}
     <p class="footer__meta">
       updated {{ site.time | date: "%Y-%m-%d" }} ·
       <a href="{{ site.rss_path | relative_url }}">rss feed</a>
     </p>
   </footer>
-
-  <script src="{{ '/assets/js/keys.js' | relative_url }}" defer></script>
 </body>
 
 </html>
