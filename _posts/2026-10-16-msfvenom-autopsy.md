@@ -4,6 +4,7 @@ date: 2026-10-16
 
 presenter: Nick Neal
 time: 7-10 pm
+rsvp: https://www.meetup.com/denhac-hackerspace/events/316410932/
 ---
 
 This will be an interactive lab covering the reverse engineering of msfvenom’s stageless Windows x64 reverse TCP shellcode. We will cover the basics of Windows internals, x86_64 assembly code in Windows, as well as the obfuscation techniques used by the shellcode author in an attempt to hinder static analysis.

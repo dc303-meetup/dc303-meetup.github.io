@@ -3,6 +3,7 @@ title: "Post-Quantum Cybersecurity: Exploring the Quantum Threat Landscape"
 date: 2026-09-25
 
 presenter: Saad Baig
+rsvp: https://www.meetup.com/denhac-hackerspace/events/316410906/
 ---
 
 Quantum computing is moving from a theoretical threat to a looming security crisis, and asymmetric cryptography is right in the crosshairs. This talk breaks down exactly how Shor’s algorithm dismantles the public-key foundations—like RSA and ECC—that secure everything from our web traffic to our identities.
