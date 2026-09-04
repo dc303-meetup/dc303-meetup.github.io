@@ -14,7 +14,7 @@ description: how to reach the dc303 organizers.
   </ul>
   <br>
   <p>
-    talk proposals are always welcome:<br>
+    talk proposals are always welcome,<br>
     pitch us anything you are working on.
   </p>
 </section>
