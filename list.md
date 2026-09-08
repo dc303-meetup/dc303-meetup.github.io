@@ -9,9 +9,10 @@ description: the dc303 mailing list
   <h2 id="list-heading" class="section__title">about the list</h2>
   <p class="notice">
     we are looking for a new mailing list provider. join the discord channel (see the
-    <a href="{{ '/meetings/' | relative_url }}">meetings page</a>) or follow the
-    <a href="{{ site.rss_path | relative_url }}">rss feed</a> to stay up to date with
-    meetup announcements.
+    <a href="{{ '/meetings/' | relative_url }}">meetings page</a>), follow the
+    <a href="{{ site.rss_path | relative_url }}">rss feed</a>, or watch the
+    <a href="https://github.com/dc303-meetup/dc303-meetup.github.io/">GitHub repo</a>
+    to stay up to date with meetup announcements.
   </p>
   <dl class="facts">
     <div class="facts__row">
