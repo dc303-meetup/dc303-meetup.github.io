@@ -1,0 +1,45 @@
+---
+layout: default
+title: not found
+heading: 404 — not found
+description: that page does not exist on dc303.org.
+permalink: /404.html
+---
+
+{%- comment -%}
+  GitHub Pages serves this for any missing path, at that path — so every link here
+  goes through relative_url (root-absolute), never a bare relative href.
+{%- endcomment -%}
+
+<section class="panel" aria-label="error 404">
+  <p class="panel__legend" aria-hidden="true">error 404</p>
+  <p class="panel__cmd"><span class="panel__prompt" aria-hidden="true">dc303&gt;</span> open page</p>
+  <p class="panel__reply">file not found in this area.</p>
+  <p>
+    the page may have moved, been renamed, or the link had a typo.
+    nothing is broken on your end.
+  </p>
+  <p class="panel__continue muted">pick a menu option below to continue<span class="cursor" aria-hidden="true"></span></p>
+</section>
+
+<section class="section" aria-labelledby="next-heading">
+  <h2 id="next-heading" class="section__title">main menu</h2>
+  <ul class="menu">
+    <li class="menu__item">
+      <a class="menu__link" href="{{ '/' | relative_url }}">home</a>
+      <span class="menu__desc">the next meetup, and what dc303 is</span>
+    </li>
+    <li class="menu__item">
+      <a class="menu__link" href="{{ '/meetings/' | relative_url }}">meetings</a>
+      <span class="menu__desc">every talk, newest first</span>
+    </li>
+    <li class="menu__item">
+      <a class="menu__link" href="{{ '/faq.html' | relative_url }}">faq</a>
+      <span class="menu__desc">first time coming? start here</span>
+    </li>
+    <li class="menu__item">
+      <a class="menu__link" href="{{ '/contacts.html' | relative_url }}">contact</a>
+      <span class="menu__desc">ask a human — or tell us about the broken link</span>
+    </li>
+  </ul>
+</section>

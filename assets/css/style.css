@@ -332,6 +332,71 @@ img { max-width: 100%; height: auto; }
 
 .topics li::before, .contacts li::before { content: "- " / ""; color: var(--muted); }
 
+/* --- 404 panel + menu ------------------------------------------------------
+   The not-found page borrows the BBS look — a boxed panel with its legend in the top
+   rule, a prompt line, a static cursor — but the message itself is a plain sentence
+   and the way out is an ordinary list of links. No fake hotkeys: every option is a
+   real link with a 44px tap target. */
+.panel {
+  position: relative;
+  border: 1px solid var(--rule);
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  margin: 0 0 var(--space-5);
+}
+
+.panel__legend {
+  position: absolute;
+  top: 0;
+  left: var(--space-3);
+  transform: translateY(-50%);
+  margin: 0;
+  background: var(--bg);
+  padding: 0 var(--space-2);
+  color: var(--fg-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+
+.panel__cmd { margin-bottom: var(--space-1); overflow-wrap: anywhere; }
+.panel__prompt { color: var(--muted); }
+.panel__reply { color: var(--fg-bright); font-weight: bold; }
+
+/* Solid block, never blinking — there is no decorative motion on this site. */
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  margin-left: 0.2em;
+  vertical-align: text-bottom;
+  background: var(--fg);
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.menu__item {
+  max-width: none;
+  padding: var(--space-1) 0 var(--space-2);
+  border-bottom: 1px solid var(--rule);
+}
+
+.menu__link {
+  display: block;
+  min-height: 2.75rem;
+  padding: var(--space-2) 0 0;
+  line-height: 1.75;
+  font-weight: bold;
+}
+
+/* inline-block keeps the link underline off the marker */
+.menu__link::before { content: "> " / ""; color: var(--muted); display: inline-block; white-space: pre; }
+.menu__desc { display: block; color: var(--muted); }
+
 /* --- footer --------------------------------------------------------------- */
 .footer {
   border-top: 1px solid var(--rule);
@@ -375,6 +440,17 @@ img { max-width: 100%; height: auto; }
   .footer .nav__list { border-top: 0; }
 
   .facts__row, .meetup__field { grid-template-columns: 11ch 1fr; }
+
+  /* One row per option, label and description side by side like a BBS menu screen. */
+  .menu__item {
+    display: grid;
+    grid-template-columns: 14ch 1fr;
+    gap: 0 var(--space-3);
+    align-items: baseline;
+    padding: var(--space-1) 0;
+  }
+
+  .menu__link { min-height: 0; padding: var(--space-1) 0; }
 }
 
 /* --- motion --------------------------------------------------------------- */
