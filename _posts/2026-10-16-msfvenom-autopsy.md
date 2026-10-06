@@ -11,4 +11,4 @@ This will be an interactive lab covering the reverse engineering of msfvenom’s
 
 To participate in the lab, you will need a fresh Windows 11 VM with 2 cpu cores, 4GB of RAM, and 64GB of disk space allocated. A script has been provided to set up the VM with the necessary software and configurations before the talk:
 
-https://github.com/nick-neal/msfvenom-win-reveng-lab
+[https://github.com/nick-neal/msfvenom-win-reveng-lab](https://github.com/nick-neal/msfvenom-win-reveng-lab)
